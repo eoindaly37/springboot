@@ -30,5 +30,5 @@ Using the maven wrapper you can run the application automatically if you have th
 
 
 ## Credits
-This project was created in March 2020 by Eoin Daly, Kristin Kan and Karol Pawlak 
+This project was created in March 2020 by Eoin Daly, Kristian Kan and Karol Pawlak 
 
