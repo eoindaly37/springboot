@@ -15,15 +15,15 @@ import java.util.stream.Collectors;
 
 // tag::constructor[]
 @RestController
-class CompanyController {
+class AddressController {
 
 	@Autowired  
-	private final CompanyRepository repository;
+	private final AddressRepository repository;
 
-	private final CompanyModelAssembler assembler;
+	private final AddressModelAssembler assembler;
 
-	CompanyController(CompanyRepository repository,
-					   CompanyModelAssembler assembler) {
+	AddressController(AddressRepository repository,
+					   AddressModelAssembler assembler) {
 		
 		this.repository = repository;
 		this.assembler = assembler;
@@ -33,23 +33,23 @@ class CompanyController {
 	// Aggregate root
 
 	// tag::get-aggregate-root[]
-	@GetMapping("/company")
-	CollectionModel<EntityModel<Company>> all() {
+	@GetMapping("/address")
+	CollectionModel<EntityModel<Address>> all() {
 
-		List<EntityModel<Company>> Companys = repository.findAll().stream()
+		List<EntityModel<Address>> Addresss = repository.findAll().stream()
 			.map(assembler::toModel)
 			.collect(Collectors.toList());
 		
-		return new CollectionModel<>(Companys,
-			linkTo(methodOn(CompanyController.class).all()).withSelfRel());
+		return new CollectionModel<>(Addresss,
+			linkTo(methodOn(AddressController.class).all()).withSelfRel());
 	}
 	// end::get-aggregate-root[]
 
 	// tag::post[]
-	@PostMapping("/company")
-	ResponseEntity<?> newCompany(@RequestBody Company newCompany) throws URISyntaxException {
+	@PostMapping("/address")
+	ResponseEntity<?> newAddress(@RequestBody Address newAddress) throws URISyntaxException {
 
-		EntityModel<Company> entityModel = assembler.toModel(repository.save(newCompany));
+		EntityModel<Address> entityModel = assembler.toModel(repository.save(newAddress));
 
 		return ResponseEntity
 			.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
@@ -60,32 +60,32 @@ class CompanyController {
 	// Single item
 
 	// tag::get-single-item[]
-	@GetMapping("/company/{id}")
-	EntityModel<Company> one(@PathVariable Long id) {
+	@GetMapping("/address/{id}")
+	EntityModel<Address> one(@PathVariable Long id) {
 
-		Company Company = repository.findById(id)
+		Address Address = repository.findById(id)
 			.orElseThrow(() -> new EmployeeNotFoundException(id));
 		
-		return assembler.toModel(Company);
+		return assembler.toModel(Address);
 	}
 	// end::get-single-item[]
 
 	// tag::put[]
-	@PutMapping("/company/{id}")
-	ResponseEntity<?> replaceCompany(@RequestBody Company newCompany, @PathVariable Long id) throws URISyntaxException {
+	@PutMapping("/address/{id}")
+	ResponseEntity<?> replaceAddress(@RequestBody Address newAddress, @PathVariable Long id) throws URISyntaxException {
 
-		Company updatedCompany = repository.findById(id)
-			.map(Company -> {
-				Company.setName(newCompany.getName());
-				Company.setNoemployees(newCompany.getNoemployees());
-				return repository.save(Company);
+		Address updatedAddress = repository.findById(id)
+			.map(Address -> {
+				Address.setCity(newAddress.getCity());
+				Address.setPostcode(newAddress.getPostcode());
+				return repository.save(Address);
 			})
 			.orElseGet(() -> {
-				newCompany.setId(id);
-				return repository.save(newCompany);
+				newAddress.setId(id);
+				return repository.save(newAddress);
 			});
 
-		EntityModel<Company> entityModel = assembler.toModel(updatedCompany);
+		EntityModel<Address> entityModel = assembler.toModel(updatedAddress);
 
 		return ResponseEntity
 			.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
@@ -94,8 +94,8 @@ class CompanyController {
 	// end::put[]
 
 	// tag::delete[]
-	@DeleteMapping("/company/{id}")
-	ResponseEntity<?> deleteCompany(@PathVariable Long id) {
+	@DeleteMapping("/address/{id}")
+	ResponseEntity<?> deleteAddress(@PathVariable Long id) {
 
 		repository.deleteById(id);
 		
