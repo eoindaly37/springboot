@@ -15,10 +15,15 @@ In this we used Spring Boot, Rest API, Hibernate, JPA, Lombok and HATEAOS
 It contains more than the standard tutorial in that the Employee class has an attribute of class Address. There is also a company class. These are all persisted to a MySQL database using JPA and Hibernate.
 
 ## Installation
-If you download the project you are able to run it with
+If you download the project you are able to run it locally with
 ```
 ./mvnw clean spring-boot:run
 ```
+To push it and run it on PCF you will need to compile it to a jar file
+```
+./mvnw clean spring-boot:run
+```
+
 
 ## Tutorial Reference
 

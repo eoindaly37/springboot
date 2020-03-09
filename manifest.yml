@@ -1,0 +1,8 @@
+applications:
+- name: my-spring
+path: target/tutrest-0.0.1-SNAPSHOT.jar
+domain: cfapps-32.haas-59.pez.pivotal.io
+memory: 1G
+instances: 1
+services:
+- mysql
