@@ -21,8 +21,9 @@ If you download the project you are able to run it locally with
 ```
 To push it and run it on PCF you will need to compile it to a jar file
 ```
-./mvnw clean spring-boot:run
+./mvnw clean package
 ```
+This will add the jar file to the target folder
 
 
 ## Tutorial Reference
