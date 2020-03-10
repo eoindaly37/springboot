@@ -28,8 +28,7 @@ class Employee {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = role;
-		Address address = new Address(line1,city,county,postcode);
-		this.address = address;
+		this.address = new Address(line1,city,county,postcode);
 	}
 
 	public String getName() {
@@ -41,4 +40,6 @@ class Employee {
 		this.firstName = parts[0];
 		this.lastName = parts[1];
 	}
+	
+
 }
